@@ -7,19 +7,20 @@ import java.nio.file.Paths
 import java.util.*
 import kotlin.streams.toList
 
-const val PATH_TO_FILES = "src/main/resources/files/"
 const val CSV_FORMAT_NAME = ".csv"
 const val MD5_FORMAT_NAME = ".md5"
 
-fun main(args: Array<String>) {
-    val files = getFiles(PATH_TO_FILES)
+fun checkEquelsMd5AndCsvFiles(pathToFiles: String): Boolean {
+    val files = getFiles(pathToFiles)
 
     if (files.isEmpty()) {
-        throw Exception("Не удалось обнаружить файлы в папке ${PATH_TO_FILES}")
+        throw Exception("Не удалось обнаружить файлы в папке ${pathToFiles}")
     }
 
     val contentOfFormatMD5 = getContentFromFilesByFormat(files, CSV_FORMAT_NAME)
     println(getMD5Hex(contentOfFormatMD5))
+
+    return false
 }
 
 fun getContentFromFilesByFormat(files: List<File>, format: String): String {
