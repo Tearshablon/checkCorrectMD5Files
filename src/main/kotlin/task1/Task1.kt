@@ -18,17 +18,13 @@ fun checkEquelsMd5AndCsvFiles(pathToFiles: String): Boolean {
         throw Exception("Не удалось обнаружить файлы в папке ${pathToFiles}")
     }
 
-    println(getContentFromMd5File(files))
+    val cvsHash = readMd5File(files)
+    val md5Hash = DigestUtils.md5Hex(readCvsFile(files))
 
-    val fis = FileInputStream(files.get(0))
-    val md5 = DigestUtils.md5Hex(fis)
-    println(md5)
-
-
-    return false
+    return cvsHash.equals(md5Hash)
 }
 
-fun getContentFromMd5File(files: List<File>): String {
+fun readMd5File(files: List<File>): String {
     var content: String? = null
     for (file in files) {
         if (file.name.contains(MD5_FORMAT_NAME)) {
@@ -36,8 +32,10 @@ fun getContentFromMd5File(files: List<File>): String {
         }
     }
 
-    if (content != null) return content else throw Exception("Не удалось обнаружить файлы формата ${MD5_FORMAT_NAME} в папке")
+    if (content != null) return content else throw Exception("Не удалось обнаружить файл формата ${MD5_FORMAT_NAME} в папке")
 }
+
+fun readCvsFile(files: List<File>) = FileInputStream(files.first { it.name.contains(CSV_FORMAT_NAME) })
 
 //TODO воткнуть проверку файла на формат
 fun getFiles(pathTo: String) = Files
