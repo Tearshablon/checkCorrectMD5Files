@@ -1,19 +1,15 @@
 package interfaces
 
 import java.io.File
-import java.io.FileInputStream
 
 interface OperationsWithFiles {
+    fun getHashFromFileByMd5(file: File) :String
 
-    //TODO воткнуть проверку файла на формат
-    fun getFilesFromFolder(pathToFolder: String): List<File>
+    fun getContentFromFile(file: File) :String
 
-    fun readMd5File(files: List<File>, fileName: String): String
+    fun getFileFromFolderByFormat(pathToFolder: String, format: String) :File
 
-    fun readCvsFile(files: List<File>, fileName: String): FileInputStream
+    fun getSingleFileFromFolder(pathToFolder: String) :File
 
-    //todo вынести в отдельный класс
-    fun checkEqualsMd5AndCsvFiles(pathToFiles: String, fileName: String): Boolean
-
-    fun formHashFileThroughtMd5(pathToFolder: String, fileName: String): String
+    fun checkEqualsMd5AndCsvFiles(pathToFiles: String): Boolean
 }
