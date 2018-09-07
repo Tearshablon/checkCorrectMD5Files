@@ -8,7 +8,7 @@ class CompressorFileToZip : CompressFileToZip {
         val file = OperationsWithFilesImpl().getSingleFileFromFolder(pathToFiles)
         val content = OperationsWithFilesImpl().getContentFromFile(file)
         val stringFile = StringFile(file.name, content)
-        val zipFiles = ZipFiles(listOf(stringFile)).compressFiles()
+        val zipFiles = ZipFiles().compressFiles(listOf(stringFile))
         OperationsWithFilesImpl().uploadZipToFolder(zipFiles, file.name, ".gz", pathToFiles)
     }
 }

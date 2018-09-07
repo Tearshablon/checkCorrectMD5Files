@@ -7,9 +7,9 @@ import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-class ZipFiles(val stringFiles: List<StringFile>) {
+class ZipFiles {
 
-    fun compressFiles(): InputStream {
+    fun compressFiles(stringFiles: List<StringFile>): InputStream {
         val baos = ByteArrayOutputStream()
         try {
             ZipOutputStream(baos).use { zos ->
