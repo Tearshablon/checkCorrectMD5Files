@@ -5,7 +5,7 @@ import utils.OperationsWithFilesImpl
 
 class CompressorFileToZip : CompressFileToZip {
     override fun compressFilesToZip(pathToFiles: String) {
-        val file = OperationsWithFilesImpl().getSingleFileFromFolder(pathToFiles)
+        val file = OperationsWithFilesImpl().getFileFromFolderByFormat(pathToFiles, ".csv")
         val content = OperationsWithFilesImpl().getContentFromFile(file)
         val stringFile = StringFile(file.name, content)
         val zipFiles = ZipFiles().compressFiles(listOf(stringFile))

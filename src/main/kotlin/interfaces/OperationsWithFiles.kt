@@ -10,7 +10,5 @@ interface OperationsWithFiles {
 
     fun getFileFromFolderByFormat(pathToFolder: String, format: String): File
 
-    fun getSingleFileFromFolder(pathToFolder: String): File
-
     fun uploadZipToFolder(inputStream: InputStream, fileName: String, fileFormat: String, pathToFile: String)
 }

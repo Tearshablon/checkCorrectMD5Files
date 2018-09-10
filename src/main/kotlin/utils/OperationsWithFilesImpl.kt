@@ -13,7 +13,7 @@ class OperationsWithFilesImpl : OperationsWithFiles {
 
     override fun getHashFromFileByMd5(file: File) = DigestUtils.md5Hex(file.inputStream())
 
-    override fun getContentFromFile(file: File) = Scanner(file).useDelimiter("\\n").next().trim()
+    override fun getContentFromFile(file: File) = Scanner(file).useDelimiter("\\Z").next().trim()
 
     override fun getFileFromFolderByFormat(pathToFolder: String, format: String) = Files
             .walk(Paths.get(pathToFolder))
@@ -22,13 +22,6 @@ class OperationsWithFilesImpl : OperationsWithFiles {
             .map { it.toFile() }
             .findFirst()
             .orElseThrow { throw Exception("Не удалось обнаружить файл в папке ${format}") }
-
-    override fun getSingleFileFromFolder(pathToFolder: String) = Files
-            .walk(Paths.get(pathToFolder))
-            .filter { !it.toFile().isDirectory }
-            .map { it.toFile() }
-            .findFirst()
-            .orElseThrow { throw Exception("Не удалось обнаружить файл в папке") }
 
     override fun uploadZipToFolder(inputStream: InputStream, fileName: String, fileFormat: String, pathToFile: String) {
         val buffer = ByteArray(inputStream.available())
